@@ -53,10 +53,26 @@ function initGrid() {
     const MAX_STEPS = 32; // Always maintain full 32-step pattern
     grid = Array(INSTRUMENTS.length).fill().map(() => Array(MAX_STEPS).fill(false));
 
-    // Create a simple default beat (only in first 16 steps)
-    for (let i = 0; i < 32; i += 4) grid[0][i] = true; // Kick on 1, 5, 9, 13
-    for (let i = 4; i < 32; i += 8) grid[1][i] = true; // Snare on 5, 13
-    for (let i = 2; i < 32; i += 4) grid[2][i] = true; // Hi-Hat
+    // New default beat pattern from image (loops every 16 steps)
+    for (let i = 0; i < MAX_STEPS; i += 16) {
+        // Kick (Row 0): 1, 5, 9, 13
+        [0, 4, 8, 12].forEach(step => grid[0][i + step] = true);
+
+        // Snare (Row 1): 5, 13
+        [4, 12].forEach(step => grid[1][i + step] = true);
+
+        // Hi-Hat (Row 2): 3, 7, 11, 15
+        [2, 6, 10, 14].forEach(step => grid[2][i + step] = true);
+
+        // Tom (Row 3): 6
+        grid[3][i + 5] = true;
+
+        // Clap (Row 4): 4
+        grid[4][i + 3] = true;
+
+        // Rim (Row 5): 12
+        grid[5][i + 11] = true;
+    }
 }
 
 /**
