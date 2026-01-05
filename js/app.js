@@ -5,7 +5,7 @@
 
 // Constants
 const INSTRUMENTS = ['KICK', 'SNARE', 'HI-HAT', 'TOM', 'CLAP', 'RIM'];
-const STEPS = 16;
+let STEPS = 16; // Can be changed to 8, 16, or 32
 
 // State
 let audioEngine;
@@ -83,6 +83,7 @@ function setupGrid() {
         // Steps container
         const stepsRow = document.createElement('div');
         stepsRow.className = 'steps-row';
+        stepsRow.style.gridTemplateColumns = `repeat(${STEPS}, 1fr)`;
 
         // Create step buttons
         for (let colIdx = 0; colIdx < STEPS; colIdx++) {
@@ -104,6 +105,7 @@ function setupGrid() {
     });
 
     // Create step numbers
+    stepNumbers.style.gridTemplateColumns = `repeat(${STEPS}, 1fr)`;
     for (let i = 0; i < STEPS; i++) {
         const number = document.createElement('div');
         number.className = 'step-number';
@@ -130,6 +132,25 @@ function setupControls() {
     // Play/Stop button
     const playBtn = document.getElementById('playBtn');
     playBtn.addEventListener('click', togglePlayback);
+
+    // Step selector (radio buttons)
+    const stepRadios = document.querySelectorAll('input[name="steps"]');
+    stepRadios.forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            const wasPlaying = isPlaying;
+            if (wasPlaying) {
+                togglePlayback(); // Stop playback
+            }
+
+            STEPS = parseInt(e.target.value);
+            initGrid();
+            setupGrid();
+
+            if (wasPlaying) {
+                togglePlayback(); // Resume playback
+            }
+        });
+    });
 
     // Tempo slider
     const tempoSlider = document.getElementById('tempoSlider');

@@ -9,17 +9,17 @@
     --text-primary: #f1f5f9;
     --text-secondary: #94a3b8;
     --text-muted: #64748b;
-    
+
     --accent-primary: #6366f1;
     --accent-secondary: #8b5cf6;
     --accent-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-    
+
     --border-color: #334155;
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
     --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
-    
+
     --glow-color: rgba(99, 102, 241, 0.3);
     --step-active: #6366f1;
     --step-inactive: #1e293b;
@@ -33,17 +33,17 @@
     --text-primary: #0f172a;
     --text-secondary: #475569;
     --text-muted: #94a3b8;
-    
+
     --accent-primary: #4f46e5;
     --accent-secondary: #7c3aed;
     --accent-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-    
+
     --border-color: #e2e8f0;
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.05);
     --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.05);
-    
+
     --glow-color: rgba(79, 70, 229, 0.2);
     --step-active: #4f46e5;
     --step-inactive: #f1f5f9;
@@ -253,6 +253,81 @@ body {
     display: block;
 }
 
+.step-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+}
+
+.selector-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+}
+
+.step-switch {
+    position: relative;
+    display: flex;
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+    padding: 3px;
+    border: 1px solid var(--border-color);
+}
+
+.step-switch input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.step-switch label {
+    position: relative;
+    z-index: 2;
+    padding: 0.375rem 0.875rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    color: var(--text-secondary);
+    user-select: none;
+}
+
+.step-switch input[type="radio"]:checked+label {
+    color: white;
+}
+
+.switch-slider {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: calc(33.333% - 2px);
+    height: calc(100% - 6px);
+    background: var(--accent-gradient);
+    border-radius: 6px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.step-switch input[type="radio"]:nth-of-type(1):checked~.switch-slider {
+    transform: translateX(0);
+}
+
+.step-switch input[type="radio"]:nth-of-type(2):checked~.switch-slider {
+    transform: translateX(100%);
+}
+
+.step-switch input[type="radio"]:nth-of-type(3):checked~.switch-slider {
+    transform: translateX(200%);
+}
+
 .tempo-control {
     display: flex;
     align-items: center;
@@ -277,6 +352,7 @@ body {
     border-radius: 3px;
     background: var(--bg-tertiary);
     outline: none;
+    appearance: none;
     -webkit-appearance: none;
 }
 
@@ -470,11 +546,11 @@ body {
     .steps-row {
         gap: 0.375rem;
     }
-    
+
     .numbers-row {
         gap: 0.375rem;
     }
-    
+
     .step {
         border-radius: 6px;
     }
@@ -484,38 +560,38 @@ body {
     .container {
         padding: 0 1rem 3rem;
     }
-    
+
     .header {
         padding: 1rem;
     }
-    
+
     .sequencer {
         padding: 1.5rem 1rem;
     }
-    
+
     .instrument-label {
         min-width: 70px;
         font-size: 0.625rem;
     }
-    
+
     .steps-row {
         gap: 0.25rem;
     }
-    
+
     .numbers-row {
         gap: 0.25rem;
     }
-    
+
     .step {
         border-radius: 4px;
         border-width: 1px;
     }
-    
+
     .controls {
         flex-direction: column;
         align-items: stretch;
     }
-    
+
     .controls-left,
     .controls-right {
         justify-content: center;
@@ -526,7 +602,7 @@ body {
     .tempo-slider {
         width: 100px;
     }
-    
+
     .step-number {
         font-size: 0.5rem;
     }
