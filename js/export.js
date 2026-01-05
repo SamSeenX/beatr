@@ -62,6 +62,7 @@ function initExportModal() {
     // Loop count slider
     loopCount.addEventListener('input', (e) => {
         loopCountValue.textContent = e.target.value;
+        updateDurationEstimate();
     });
 
     // MP3 quality slider
@@ -71,6 +72,32 @@ function initExportModal() {
 
     // Export button
     modalExport.addEventListener('click', handleExport);
+
+    // Initial duration calculation
+    updateDurationEstimate();
+}
+
+/**
+ * Update duration estimate based on tempo, steps, and loops
+ */
+function updateDurationEstimate() {
+    const loops = parseInt(document.getElementById('loopCount').value);
+    const secondsPerBeat = 60.0 / tempo;
+    const secondsPerStep = secondsPerBeat * 0.25; // 16th notes
+    const loopDuration = STEPS * secondsPerStep;
+    const totalDuration = loopDuration * loops;
+
+    // Format duration nicely
+    let formatted;
+    if (totalDuration < 60) {
+        formatted = `~${totalDuration.toFixed(1)}s`;
+    } else {
+        const minutes = Math.floor(totalDuration / 60);
+        const seconds = Math.floor(totalDuration % 60);
+        formatted = `~${minutes}m ${seconds}s`;
+    }
+
+    document.getElementById('durationEstimate').textContent = formatted;
 }
 
 /**
