@@ -42,6 +42,7 @@ function init() {
     setupVisualizer();
     setupTheme();
     setupKeyboardShortcuts();
+    initExportModal();
 }
 
 /**
