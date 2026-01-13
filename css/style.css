@@ -106,6 +106,19 @@ body {
     padding: 1.5rem 2rem;
     max-width: 1400px;
     margin: 0 auto;
+    gap: 1rem;
+}
+
+/* Ad Banner Container */
+.ad-banner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 468px;
+    width: 468px;
+    min-height: 60px;
+    height: 60px;
+    flex-shrink: 0;
 }
 
 .logo {
@@ -116,6 +129,7 @@ body {
     font-size: 1.25rem;
     color: var(--text-primary);
     text-decoration: none;
+    flex-shrink: 0;
 }
 
 .logo-icon {
