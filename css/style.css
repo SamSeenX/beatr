@@ -807,11 +807,22 @@ body {
         justify-content: center;
     }
 
-    .ad-banner-container {
-        order: 3;
-        width: 100%;
-        min-width: auto;
+    /* When wrapped, each element takes full width and centers its content */
+    .header>.logo,
+    .header>.ad-banner-container,
+    .header>.header-right {
+        flex: 1 1 100%;
         justify-content: center;
+        text-align: center;
+    }
+
+    .ad-banner-container {
+        order: 2;
+        min-width: auto;
+    }
+
+    .header-right {
+        order: 3;
     }
 
     .sequencer {
